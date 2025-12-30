@@ -412,7 +412,7 @@ const NewsSection = () => {
     const [newsItems] = useState([
         {
             id: 1,
-            image: "/newsarticle1.png",
+            image: `${import.meta.env.BASE_URL}newsarticle1.png`,
             title: "College of Nursing Hosts International Conference on Patient Care Excellence",
             tag: "Nursing",
             date: "November 20, 2024",
@@ -420,7 +420,7 @@ const NewsSection = () => {
         },
         {
             id: 2,
-            image: "/newsarticle1.png",
+            image: `${import.meta.env.BASE_URL}newsarticle1.png`,
             title: "College of Nursing Hosts International Conference on Patient Care Excellence",
             tag: "Nursing",
             date: "November 20, 2024",
@@ -428,7 +428,7 @@ const NewsSection = () => {
         },
         {
             id: 3,
-            image: "/newsarticle2.png",
+            image: `${import.meta.env.BASE_URL}newsarticle2.png`,
             title: "Medical College Students Secure Top Ranks in NEET PG Examinations",
             tag: "Medical Sciences",
             date: "November 25, 2024",
@@ -436,7 +436,7 @@ const NewsSection = () => {
         },
         {
             id: 4,
-            image: "/newsarticle3.png",
+            image: `${import.meta.env.BASE_URL}newsarticle3.png`,
             title: "New State-of-the-Art Simulation Lab Inaugurated at Paramedical College",
             tag: "Paramedical Sciences",
             date: "November 22, 2024",
@@ -444,7 +444,7 @@ const NewsSection = () => {
         },
         {
             id: 5,
-            image: "/newsarticle3.png",
+            image: `${import.meta.env.BASE_URL}newsarticle3.png`,
             title: "New State-of-the-Art Simulation Lab Inaugurated at Paramedical College",
             tag: "Paramedical Sciences",
             date: "November 22, 2024",
