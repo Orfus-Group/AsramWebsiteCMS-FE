@@ -9,7 +9,7 @@ const DashboardLayout = ({ children }) => {
             {/* Mobile Header - Sticky Top */}
             <div className="fixed top-0 left-0 right-0 h-[60px] bg-white z-40 flex items-center justify-between px-4 shadow-sm md:hidden">
                 <div className="flex items-center gap-3">
-                    <img src="/ASymbol.png" alt="Asram" className="w-8 h-8" />
+                    <img src={`${import.meta.env.BASE_URL}ASymbol.png`} alt="Asram" className="w-8 h-8" />
                     <span className="font-['Montserrat'] font-semibold text-lg text-[#223f7f]">Asram</span>
                 </div>
                 <button

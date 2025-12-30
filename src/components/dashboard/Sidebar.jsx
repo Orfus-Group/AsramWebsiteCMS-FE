@@ -75,7 +75,7 @@ const Sidebar = ({ isOpen = false, onClose }) => {
 
             {/* Logo Area */}
             <div className="flex items-center justify-center gap-2" style={{ marginBottom: '50px' }}>
-                <img src="/ASymbol.png" alt="Asram" style={{ width: '44.5px', height: '44.1px' }} />
+                <img src={`${import.meta.env.BASE_URL}ASymbol.png`} alt="Asram" style={{ width: '44.5px', height: '44.1px' }} />
                 <span className="font-['Montserrat'] font-semibold text-[40.3px] leading-none text-[#223f7f]">Asram</span>
             </div>
 
