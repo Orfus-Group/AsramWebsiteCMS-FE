@@ -17,7 +17,7 @@ const Logo = ({ variant = 'full', className = '' }) => {
 
     return (
         <img
-            src="/asramlogo.png"
+            src={`${import.meta.env.BASE_URL}asramlogo.png`}
             alt="ASRAM Logo"
             className={`object-contain block ${className}`}
         />

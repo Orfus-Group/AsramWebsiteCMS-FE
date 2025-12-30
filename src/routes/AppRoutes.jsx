@@ -18,7 +18,7 @@ const AppRoutes = () => {
                     <NewsSection />
                 </DashboardLayout>
             } />
-            <Route path="/dashboard/create-news" element={
+            <Route path="/dashboard/create" element={
                 <DashboardLayout>
                     <CreateNewsPost />
                 </DashboardLayout>

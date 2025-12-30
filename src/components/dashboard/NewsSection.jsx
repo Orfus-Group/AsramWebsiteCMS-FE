@@ -287,7 +287,7 @@ const CreatePostCard = () => {
 
     return (
         <div
-            onClick={() => navigate('/dashboard/create-news')}
+            onClick={() => navigate('/dashboard/create')}
             style={{
                 cursor: 'pointer',
                 position: "relative",

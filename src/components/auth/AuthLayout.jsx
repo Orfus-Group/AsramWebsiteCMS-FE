@@ -6,7 +6,7 @@ const AuthLayout = ({ children }) => {
         <div
             className="min-h-screen w-screen bg-cover bg-center bg-no-repeat flex items-center justify-center py-[60px]"
             style={{
-                backgroundImage: "url('/signinbg.png')"
+                backgroundImage: `url('${import.meta.env.BASE_URL}signinbg.png')`
             }}
         >
             <div
