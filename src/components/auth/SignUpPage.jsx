@@ -57,13 +57,28 @@ const SignUpPage = () => {
 
     const validateForm = () => {
         const errors = {};
-        if (!formData.emailOrUserId.trim()) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // Password: Min 8 chars, 1 number, 1 special char
+        const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+
+        const input = formData.emailOrUserId.trim();
+
+        if (!input) {
             errors.emailOrUserId = 'Email or User ID is required';
+        } else if (input.includes('@')) {
+            if (!emailRegex.test(input)) {
+                errors.emailOrUserId = 'Please enter a valid email address';
+            }
+        } else {
+            if (input.length < 3) {
+                errors.emailOrUserId = 'User ID must be at least 3 characters';
+            }
         }
+
         if (!formData.password) {
             errors.password = 'Password is required';
-        } else if (formData.password.length < 8) {
-            errors.password = 'Password must be at least 8 characters';
+        } else if (!passwordRegex.test(formData.password)) {
+            errors.password = 'Password must correspond to the requirement';
         }
 
         if (!formData.confirmPassword) {
@@ -229,7 +244,7 @@ const SignUpPage = () => {
                 <button
                     type="button"
                     onClick={handleLogin}
-                    className="text-[14px] leading-[20px] font-medium text-[#223f7f] hover:text-[#1a3163] transition-colors"
+                    className="text-[14px] leading-[20px] font-medium text-[#223f7f] hover:text-[#1a3163] transition-colors cursor-pointer"
                 >
                     Login
                 </button>

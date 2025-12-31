@@ -46,9 +46,21 @@ const SignInPage = () => {
 
     const validateForm = () => {
         const errors = {};
-        if (!formData.emailOrUserId.trim()) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const input = formData.emailOrUserId.trim();
+
+        if (!input) {
             errors.emailOrUserId = 'Email or User ID is required';
+        } else if (input.includes('@')) {
+            if (!emailRegex.test(input)) {
+                errors.emailOrUserId = 'Please enter a valid email address';
+            }
+        } else {
+            if (input.length < 3) {
+                errors.emailOrUserId = 'User ID must be at least 3 characters';
+            }
         }
+
         if (!formData.password) {
             errors.password = 'Password is required';
         }
@@ -150,7 +162,7 @@ const SignInPage = () => {
                     <button
                         type="button"
                         onClick={handleForgotPassword}
-                        className="text-[14px] leading-[20px] font-normal text-[#223f7f] hover:text-[#1a3163] transition-colors"
+                        className="text-[14px] leading-[20px] font-normal text-[#223f7f] hover:text-[#1a3163] transition-colors cursor-pointer"
                     >
                         Forgot Password?
                     </button>
@@ -215,7 +227,7 @@ const SignInPage = () => {
                 <button
                     type="button"
                     onClick={handleRequestAccess}
-                    className="text-[14px] leading-[20px] font-medium text-[#223f7f] hover:text-[#1a3163] transition-colors"
+                    className="text-[14px] leading-[20px] font-medium text-[#223f7f] hover:text-[#1a3163] transition-colors cursor-pointer"
                 >
                     Request Access
                 </button>

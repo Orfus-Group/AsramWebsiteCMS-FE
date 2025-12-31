@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SignOutIcon = () => (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -12,9 +13,13 @@ const CloseIcon = () => (
     </svg>
 );
 
-const SidebarItem = ({ label, active = false }) => (
+const SidebarItem = ({ label, active = false, onClick }) => (
     <div
-        className={`flex items-center transition-all cursor-pointer font-['Montserrat'] font-semibold text-[16px] ${active ? 'bg-[#223f7f] text-white' : 'bg-white text-[#3a3a3a] hover:translate-x-1'
+        onClick={onClick}
+        className={`flex items-center transition-all cursor-pointer font-['Montserrat'] font-semibold text-[16px] select-none
+            ${active
+                ? 'bg-[#223f7f] text-white'
+                : 'bg-white text-[#3a3a3a] hover:bg-[#223f7f]/10' // Hover opacity background
             }`}
         style={{
             marginBottom: '8px',
@@ -22,6 +27,10 @@ const SidebarItem = ({ label, active = false }) => (
             paddingRight: '20px',
             height: '52px',
             borderRadius: '8px',
+            // Only show border on active to match design, or keep it consistent? 
+            // Original code had borderRight on everything. Let's keep it but maybe change color for inactive?
+            // Actually, original: borderRight: '4px solid #223f7f' for ALL.
+            // If we want "same background color", we keep existing active logic.
             borderRight: '4px solid #223f7f',
             lineHeight: '1.38',
             textAlign: 'left'
@@ -48,13 +57,23 @@ const SectionTitle = ({ title }) => (
 );
 
 const Sidebar = ({ isOpen = false, onClose }) => {
+    // Local state for active selection
+    // Default to 'News' or whatever makes sense
+    const [activeItem, setActiveItem] = React.useState('News');
+
+    const handleItemClick = (label) => {
+        setActiveItem(label);
+        // User requested NO navigation for now
+        // if (window.innerWidth < 768 && onClose) onClose();
+    };
+
     return (
         <div
             // FIX: Changed from 'fixed' to 'fixed md:relative'.
             // On mobile (default), it's 'fixed' (drawer behavior).
             // On desktop (md), it's 'relative' (flex layout behavior).
             // This allows it to sit side-by-side with content without standard CSS overlap issues.
-            className={`flex flex-col h-screen shrink-0 fixed md:relative left-0 top-0 bg-[#EEF2F7] transition-transform duration-300 ease-in-out z-50
+            className={`flex flex-col h-screen shrink-0 fixed md:relative left-0 top-0 bg-[#EEF2F7] transition-transform duration-300 ease-in-out z-50 overflow-x-hidden
                 ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
                 md:translate-x-0`}
             style={{
@@ -80,20 +99,36 @@ const Sidebar = ({ isOpen = false, onClose }) => {
             </div>
 
             {/* Navigation */}
-            <div className="flex-1 flex flex-col overflow-y-auto no-scrollbar">
+            <div className="flex-1 flex flex-col overflow-y-auto no-scrollbar overflow-x-hidden">
 
                 <SectionTitle title="Content" />
-                <SidebarItem label="News" active={true} />
-                <SidebarItem label="Events" />
+                <SidebarItem
+                    label="News"
+                    active={activeItem === 'News'}
+                    onClick={() => handleItemClick('News')}
+                />
+                <SidebarItem
+                    label="Events"
+                    active={activeItem === 'Events'}
+                    onClick={() => handleItemClick('Events')}
+                />
 
                 <div style={{ marginTop: '20px' }}>
                     <SectionTitle title="Users" />
-                    <SidebarItem label="User Management" />
+                    <SidebarItem
+                        label="User Management"
+                        active={activeItem === 'User Management'}
+                        onClick={() => handleItemClick('User Management')}
+                    />
                 </div>
 
                 <div style={{ marginTop: '20px' }}>
                     <SectionTitle title="Forms" />
-                    <SidebarItem label="Enquiries" />
+                    <SidebarItem
+                        label="Enquiries"
+                        active={activeItem === 'Enquiries'}
+                        onClick={() => handleItemClick('Enquiries')}
+                    />
                 </div>
 
             </div>
@@ -101,7 +136,7 @@ const Sidebar = ({ isOpen = false, onClose }) => {
             {/* Sign Out Button */}
             <div className="mt-auto" style={{ marginTop: '52px' }}>
                 <button
-                    className="flex items-center justify-center font-['Montserrat'] font-semibold text-[16px] transition-all hover:opacity-80"
+                    className="flex items-center justify-center font-['Montserrat'] font-semibold text-[16px] transition-all hover:opacity-80 cursor-pointer"
                     style={{
                         width: '220px',
                         height: '52px',

@@ -598,17 +598,36 @@ const NewsSection = () => {
                         className="w-full bg-transparent outline-none font-['Montserrat']"
                         style={{
                             fontSize: 'clamp(14px, 1.6vw, 18px)',
-                            lineHeight: 1.11,
-                            color: 'rgba(25,25,25,0.75)'
+                            color: 'rgba(25, 25, 25, 0.75)',
+                            lineHeight: 'normal'
                         }}
                     />
+
+                    {/* CLEAR ICON */}
+                    {searchTerm && (
+                        <div
+                            onClick={() => handleSearch({ target: { value: '' } })}
+                            style={{
+                                width: '20px',
+                                height: '20px',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}
+                        >
+                            <svg width="12" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L13 13M1 13L13 1" stroke="#191919" strokeOpacity="0.5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </div>
+                    )}
                 </div>
 
                 {/* FILTER BUTTON */}
                 <div ref={filterRef} className="w-full sm:w-auto" style={{ position: 'relative' }}>
                     <button
                         onClick={() => setShowFilterMenu(!showFilterMenu)}
-                        className="flex items-center justify-center bg-white border border-[rgba(7,7,7,0.2)] font-['Montserrat'] shrink-0 w-full sm:w-auto"
+                        className="flex items-center justify-center bg-white border border-[rgba(7,7,7,0.2)] font-['Montserrat'] shrink-0 w-full sm:w-auto cursor-pointer"
                         style={{
                             height: 'clamp(40px, 4vw, 44px)',
                             paddingLeft: 'clamp(16px, 4vw, 40px)',
