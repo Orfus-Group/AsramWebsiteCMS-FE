@@ -100,7 +100,7 @@ const SignInPage = () => {
     };
 
     const handleRequestAccess = () => {
-        navigate('/request-access');
+        navigate('/signup');
     };
 
     return (
