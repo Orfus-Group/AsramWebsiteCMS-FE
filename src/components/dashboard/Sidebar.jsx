@@ -57,13 +57,36 @@ const SectionTitle = ({ title }) => (
 );
 
 const Sidebar = ({ isOpen = false, onClose }) => {
+    const navigate = useNavigate();
     // Local state for active selection
     // Default to 'News' or whatever makes sense
+    const location = useLocation();
     const [activeItem, setActiveItem] = React.useState('News');
+
+    React.useEffect(() => {
+        const path = location.pathname;
+        if (path.includes('/dashboard')) {
+            if (path === '/event-dashboard') {
+                setActiveItem('Events');
+            } else if (path.includes('create')) {
+                // Keep 'News' active for create news or maybe nothing? 
+                // Defaulting to News for now as it's part of news flow usually
+                setActiveItem('News');
+            } else {
+                setActiveItem('News');
+            }
+        } else if (path === '/event-dashboard') {
+            setActiveItem('Events');
+        }
+    }, [location]);
 
     const handleItemClick = (label) => {
         setActiveItem(label);
-        // User requested NO navigation for now
+        if (label === 'Events') {
+            navigate('/event-dashboard');
+        } else if (label === 'News') {
+            navigate('/dashboard');
+        }
         // if (window.innerWidth < 768 && onClose) onClose();
     };
 

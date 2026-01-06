@@ -5,6 +5,12 @@
   text-align: center;
 }
 
+html, body {
+  transform: none !important;
+  overflow: visible !important;
+}
+
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -39,4 +45,30 @@
 
 .read-the-docs {
   color: #888;
+}
+
+
+/* FIX broken Chrome time picker */
+input[type="time"] {
+  font-size: 16px;              /* MUST be >= 16px */
+  line-height: normal;
+  letter-spacing: normal;
+  transform: none;
+}
+
+/* Chrome / Edge specific */
+input[type="time"]::-webkit-datetime-edit,
+input[type="time"]::-webkit-datetime-edit-fields-wrapper,
+input[type="time"]::-webkit-datetime-edit-hour-field,
+input[type="time"]::-webkit-datetime-edit-minute-field,
+input[type="time"]::-webkit-datetime-edit-ampm-field {
+  font-size: 16px;
+  line-height: normal;
+  letter-spacing: normal;
+  transform: none;
+}
+
+/* Remove accidental scaling */
+input[type="time"]::-webkit-calendar-picker-indicator {
+  transform: none;
 }

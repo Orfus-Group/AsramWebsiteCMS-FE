@@ -6,6 +6,7 @@ import DashboardLayout from '../components/dashboard/DashboardLayout';
 
 import NewsSection from '../components/dashboard/NewsSection';
 import CreateNewsPost from '../components/dashboard/CreateNewsPost';
+import EventDashboard from '../components/dashboard/EventDashboard';
 
 const AppRoutes = () => {
     return (
@@ -21,6 +22,11 @@ const AppRoutes = () => {
             <Route path="/dashboard/create" element={
                 <DashboardLayout>
                     <CreateNewsPost />
+                </DashboardLayout>
+            } />
+            <Route path="/event-dashboard" element={
+                <DashboardLayout>
+                    <EventDashboard />
                 </DashboardLayout>
             } />
             {/* Add more routes here as needed */}
