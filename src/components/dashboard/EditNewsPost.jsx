@@ -195,7 +195,7 @@ const EditNewsPost = () => {
                         <div className="flex flex-col gap-0.5">
                             <div className="flex items-center gap-2 font-bold text-[#1e293b] text-[16px]">
                                 <IconUser size={16} className="text-[#64748b]" />
-                                <span>Dr. Rajesh Kumar</span>
+                                <span className="text-[#64748b]">Dr. Rajesh Kumar</span>
                             </div>
                             <span className="text-[#64748b] text-[14px]">Director of Communications</span>
                         </div>
@@ -265,6 +265,13 @@ const EditNewsPost = () => {
                     </div>
 
                 </div>
+            </div>
+
+            {/* ==================== DELETE ACTION ==================== */}
+            <div className="global-page-spacing" style={{ marginTop: '-40px', marginBottom: '80px' }}>
+                <button className="delete-action-btn">
+                    Delete
+                </button>
             </div>
 
         </div>

@@ -264,3 +264,26 @@ body {
 .user-modal-save-btn:hover {
     background-color: #1a3366;
 }
+
+.delete-action-btn {
+    height: 48px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    border-radius: 9px;
+    border: 1px solid rgba(7, 7, 7, 0.2);
+    background-color: rgba(192, 57, 43, 0.1);
+    color: #c0392b;
+    /* Using a standard red that matches the bg tone or dark grey if text is black. Screenshot text looks dark grey but bg is red. Let's assume standard 'Delete' red text or inherit? Figma usually implies red text on red bg. I'll use a strong red #c0392b */
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.delete-action-btn:hover {
+    background-color: rgba(192, 57, 43, 0.2);
+}
