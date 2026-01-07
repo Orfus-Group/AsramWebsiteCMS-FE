@@ -3,6 +3,35 @@ import React, { useState, useEffect } from 'react';
 const Enquiries = () => {
     const [padding, setPadding] = useState('24px 40px');
 
+    // State for dropdowns
+    const [activeDropdown, setActiveDropdown] = useState(null); // 'formType', 'status', 'institute'
+    const [filters, setFilters] = useState({
+        formType: 'All Types',
+        status: 'All Statuses',
+        institute: 'All Institutes'
+    });
+
+    const toggleDropdown = (name) => {
+        setActiveDropdown(activeDropdown === name ? null : name);
+    };
+
+    const handleSelect = (filterName, value) => {
+        setFilters({ ...filters, [filterName]: value });
+        setActiveDropdown(null);
+    };
+
+    // Row Action Dropdown Logic
+    const [activeActionDropdown, setActiveActionDropdown] = useState(null);
+    const toggleActionDropdown = (id) => {
+        setActiveActionDropdown(activeActionDropdown === id ? null : id);
+    };
+
+    // Dropdown Options
+    const formTypeOptions = ['All Types', 'Contact Us', 'Admissions', 'Event Registration', 'General Enquiry'];
+    const statusOptions = ['All Statuses', 'New', 'In Progress', 'Closed'];
+    const actionStatusOptions = ['New', 'In Progress', 'Closed']; // For row actions
+    const instituteOptions = ['All Institutes', 'Medical College', 'Nursing College', 'Paramedical College']; // Added generic options as placeholder
+
     // MOCK DATA based on Figma
     const stats = [
         { label: 'Total Enquiries', value: '5' },
@@ -105,13 +134,22 @@ const Enquiries = () => {
                             Form Type:
                         </span>
 
-                        <div className="enquiries-filter-select">
+                        <div className="enquiries-filter-select" onClick={() => toggleDropdown('formType')}>
                             <span className="text-[14px] text-[#191919] truncate ">
-                                All Types
+                                {filters.formType}
                             </span>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className={`transition-transform ${activeDropdown === 'formType' ? 'rotate-180' : ''}`}>
                                 <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" />
                             </svg>
+                            {activeDropdown === 'formType' && (
+                                <div className="enquiries-dropdown-menu">
+                                    {formTypeOptions.map((option) => (
+                                        <div key={option} className="enquiries-dropdown-item" onClick={(e) => { e.stopPropagation(); handleSelect('formType', option); }}>
+                                            {option}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -121,7 +159,23 @@ const Enquiries = () => {
                             Status:
                         </span>
 
-                        <div className="enquiries-filter-select" />
+                        <div className="enquiries-filter-select" onClick={() => toggleDropdown('status')}>
+                            <span className="text-[14px] text-[#191919] truncate ">
+                                {filters.status}
+                            </span>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className={`transition-transform ${activeDropdown === 'status' ? 'rotate-180' : ''}`}>
+                                <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" />
+                            </svg>
+                            {activeDropdown === 'status' && (
+                                <div className="enquiries-dropdown-menu">
+                                    {statusOptions.map((option) => (
+                                        <div key={option} className="enquiries-dropdown-item" onClick={(e) => { e.stopPropagation(); handleSelect('status', option); }}>
+                                            {option}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                     </div>
 
                     {/* Institute */}
@@ -130,7 +184,23 @@ const Enquiries = () => {
                             Institute:
                         </span>
 
-                        <div className="enquiries-filter-select" />
+                        <div className="enquiries-filter-select" onClick={() => toggleDropdown('institute')}>
+                            <span className="text-[14px] text-[#191919] truncate ">
+                                {filters.institute}
+                            </span>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className={`transition-transform ${activeDropdown === 'institute' ? 'rotate-180' : ''}`}>
+                                <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" />
+                            </svg>
+                            {activeDropdown === 'institute' && (
+                                <div className="enquiries-dropdown-menu">
+                                    {instituteOptions.map((option) => (
+                                        <div key={option} className="enquiries-dropdown-item" onClick={(e) => { e.stopPropagation(); handleSelect('institute', option); }}>
+                                            {option}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -209,9 +279,10 @@ const Enquiries = () => {
                             </div>
 
                             {/* Action Button */}
-                            <div className="flex justify-center">
+                            <div className="flex justify-center relative">
                                 <button
                                     className="text-[12px] font-medium"
+                                    onClick={(e) => { e.stopPropagation(); toggleActionDropdown(row.id); }}
                                     style={{
                                         ...getStatusStyle(row.status),
                                         height: '40px',
@@ -222,12 +293,33 @@ const Enquiries = () => {
                                         padding: '4px 12px',
                                         borderRadius: '6px',
                                         width: '100%', // Allow it to fill or set a specific width if needed, initially fill container
-                                        maxWidth: '120px' // Reasonable max width
+                                        maxWidth: '120px', // Reasonable max width
+                                        cursor: 'pointer',
+                                        border: 'none'
                                     }}
                                 >
                                     {row.status}
-                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M6 9l6 6 6-6" /></svg>
+                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className={`transition-transform ${activeActionDropdown === row.id ? 'rotate-180' : ''}`}><path d="M6 9l6 6 6-6" /></svg>
                                 </button>
+
+                                {activeActionDropdown === row.id && (
+                                    <div className="enquiries-dropdown-menu" style={{ width: '120px', top: '100%', zIndex: 100 }}>
+                                        {actionStatusOptions.map((status) => (
+                                            <div
+                                                key={status}
+                                                className="enquiries-dropdown-item"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    // Here you would typically update the row's status
+                                                    console.log(`Setting status of ${row.id} to ${status}`);
+                                                    setActiveActionDropdown(null);
+                                                }}
+                                            >
+                                                {status}
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
 
                             {/* Date */}

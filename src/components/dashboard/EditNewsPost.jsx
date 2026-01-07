@@ -182,7 +182,17 @@ const EditNewsPost = () => {
 
                         <div className="flex items-center gap-4">
                             <span className="share-label">Share:</span>
-                            <button className="share-btn">
+                            <button  onClick={() => {
+                                    if (navigator.share) {
+                                        navigator.share({
+                                            title: article.title,
+                                            url: window.location.href,
+                                        });
+                                    } else {
+                                        navigator.clipboard.writeText(window.location.href);
+                                        alert("Link copied to clipboard!");
+                                    }
+                                }} className="share-btn">
                                 <IconShare size={16} />
                                 <span>Share</span>
                             </button>
