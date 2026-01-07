@@ -287,3 +287,47 @@ body {
 .delete-action-btn:hover {
     background-color: rgba(192, 57, 43, 0.2);
 }
+
+.user-management-table-grid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 2fr 3fr 1.4fr 2.4fr 1.4fr 1fr;
+    /* Ratios based on 197/288/140/240/140/100 */
+    align-items: center;
+}
+
+.enquiries-table-grid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1.6fr 2fr 1.5fr 1.8fr 1.9fr 1.6fr 1.4fr;
+    align-items: center;
+}
+
+.enquiries-filters-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    width: 100%;
+    align-items: center;
+}
+
+.enquiries-filter-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-width: 0;
+}
+
+.enquiries-filter-select {
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    height: 34px;
+    padding: 0 8px;
+    /* Matching existing horizontal padding */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

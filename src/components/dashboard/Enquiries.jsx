@@ -98,32 +98,14 @@ const Enquiries = () => {
                 </div>
 
                 {/* Filters Container */}
-                <div
-                    className="
-      flex items-center flex-1
-      gap-[12px] md:gap-[16px] lg:gap-[24px] xl:gap-[40px]
-      flex-nowrap
-      min-w-0
-    "
-                >
+                <div className="enquiries-filters-wrapper flex-1 min-w-0">
                     {/* Form Type */}
-                    <div className="flex items-center gap-[8px] min-w-0">
+                    <div className="enquiries-filter-group">
                         <span className="text-[14px] text-[#191919]/70 whitespace-nowrap">
                             Form Type:
                         </span>
 
-                        <div
-                            className="
-          flex items-center justify-between
-          bg-white border border-[#e0e0e0] rounded-[8px]
-          h-[34px] px-[8px]
-          flex-shrink
-          min-w-0
-        "
-                            style={{
-                                width: "clamp(110px, 18vw, 240px)", padding: '0 8px'
-                            }}
-                        >
+                        <div className="enquiries-filter-select">
                             <span className="text-[14px] text-[#191919] truncate ">
                                 All Types
                             </span>
@@ -134,39 +116,21 @@ const Enquiries = () => {
                     </div>
 
                     {/* Status */}
-                    <div className="flex items-center gap-[8px] min-w-0">
+                    <div className="enquiries-filter-group">
                         <span className="text-[14px] text-[#191919]/70 whitespace-nowrap">
                             Status:
                         </span>
 
-                        <div
-                            className="
-          bg-white border border-[#e0e0e0] rounded-[8px]
-          h-[34px]
-          flex-shrink min-w-0
-        "
-                            style={{
-                                width: "clamp(110px, 18vw, 240px)",
-                            }}
-                        />
+                        <div className="enquiries-filter-select" />
                     </div>
 
                     {/* Institute */}
-                    <div className="flex items-center gap-[8px] min-w-0">
+                    <div className="enquiries-filter-group">
                         <span className="text-[14px] text-[#191919]/70 whitespace-nowrap">
                             Institute:
                         </span>
 
-                        <div
-                            className="
-          bg-white border border-[#e0e0e0] rounded-[8px]
-          h-[34px]
-          flex-shrink min-w-0
-        "
-                            style={{
-                                width: "clamp(110px, 22vw, 260px)",
-                            }}
-                        />
+                        <div className="enquiries-filter-select" />
                     </div>
                 </div>
             </div>
@@ -175,12 +139,11 @@ const Enquiries = () => {
 
             {/* Table Section */}
             <div className="w-full overflow-x-auto rounded-[8px] border border-[#e0e0e0]">
-                <div className="flex flex-col bg-white overflow-hidden" style={{ minWidth: '1180px' }}>
+                <div className="flex flex-col bg-white overflow-hidden">
 
                     {/* Table Header */}
-                    <div className="grid w-full bg-[#f6f8fb] border-b border-[#e0e0e0]"
+                    <div className="enquiries-table-grid bg-[#f6f8fb] border-b border-[#e0e0e0]"
                         style={{
-                            gridTemplateColumns: '160px 200px 150px 180px 190px 160px 140px',
                             height: '52.5px'
                         }}>
                         {['Name', 'Email / Phone', 'Form Type', 'Source Page', 'Assigned School', 'Actions', 'Received Date'].map((head, i) => (
@@ -191,9 +154,8 @@ const Enquiries = () => {
 
                     {/* Table Body */}
                     {enquiries.map((row) => (
-                        <div key={row.id} className="grid w-full border-b border-[#e0e0e0] last:border-b-0"
+                        <div key={row.id} className="enquiries-table-grid border-b border-[#e0e0e0] last:border-b-0"
                             style={{
-                                gridTemplateColumns: '160px 200px 150px 180px 190px 160px 140px',
                                 height: '80px', // Taller rows for multi-line content
                                 alignItems: 'center'
                             }}>

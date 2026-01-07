@@ -326,13 +326,11 @@ const UserManagement = () => {
 
             {/* Table Section Wrapper for Horizontal Scroll */}
             <div className="w-full overflow-x-auto rounded-[8px] border border-[#e0e0e0]">
-                <div className="flex flex-col bg-white overflow-hidden"
-                    style={{ minWidth: '1104px' }}>
+                <div className="flex flex-col bg-white overflow-hidden">
 
                     {/* Table Header */}
-                    <div className="grid w-full bg-[#f6f8fb] border-b border-[#e0e0e0]"
+                    <div className="user-management-table-grid bg-[#f6f8fb] border-b border-[#e0e0e0]"
                         style={{
-                            gridTemplateColumns: '197.5px 287.8px 140px 240px 140px 1fr',
                             height: '52.5px'
                         }}>
                         {['Name', 'Email', 'Role', 'Assigned School', 'Status', 'Actions'].map((head, i) => (
@@ -351,9 +349,8 @@ const UserManagement = () => {
                     <div className="flex flex-col w-full">
                         {users.map((user, index) => (
                             <div key={user.id}
-                                className="grid w-full border-b border-[#e0e0e0] last:border-b-0"
+                                className="user-management-table-grid border-b border-[#e0e0e0] last:border-b-0"
                                 style={{
-                                    gridTemplateColumns: '197.5px 287.8px 140px 240px 140px 1fr',
                                     height: '73px'
                                 }}>
 
