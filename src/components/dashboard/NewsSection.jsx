@@ -58,9 +58,10 @@ const StatCard = ({ title, value, label, bgColor }) => (
 );
 
 
-const NewsCard = ({ title, tag, date, status, image }) => (
+const NewsCard = ({ title, tag, date, status, image, onClick }) => (
     <div
-        className="font-['Montserrat']"
+        onClick={onClick}
+        className="font-['Montserrat'] group relative"
         style={{
             width: '100%',
             // minWidth removed to prevent horizontal scroll on small screens
@@ -76,6 +77,15 @@ const NewsCard = ({ title, tag, date, status, image }) => (
             cursor: 'pointer'
         }}
     >
+        {/* Hover Overlay */}
+        <div className="absolute inset-0 bg-white/30 z-20 hidden group-hover:flex items-center justify-center transition-all duration-300 backdrop-blur-[1px]">
+            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg transform transition-transform scale-0 group-hover:scale-100 duration-300">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11 4H4C3.46957 4 2.96086 4.21071 2.58579 4.58579C2.21071 4.96086 2 5.46957 2 6V20C2 20.5304 2.21071 21.0391 2.58579 21.4142C2.96086 21.7893 3.46957 22 4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V13" stroke="#223F7F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M18.5 2.50001C18.8978 2.10218 19.4374 1.87869 20 1.87869C20.5626 1.87869 21.1022 2.10218 21.5 2.50001C21.8978 2.89783 22.1213 3.4374 22.1213 4.00001C22.1213 4.56262 21.8978 5.10218 21.5 5.50001L12 15L8 16L9 12L18.5 2.50001Z" stroke="#223F7F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+            </div>
+        </div>
         {/* Image Container */}
         <div style={{ position: 'relative', width: '100%', height: '53.5%' }}>
             <img
@@ -377,6 +387,7 @@ const CreatePostCard = () => {
 
 
 const NewsSection = () => {
+    const navigate = useNavigate();
     // Sample news data - In production, replace with API call:
     // Example API integration:
     // const [newsItems, setNewsItems] = useState([]);
@@ -750,6 +761,7 @@ const NewsSection = () => {
                         tag={news.tag}
                         date={news.date}
                         status={news.status}
+                        onClick={() => navigate(`/dashboard/edit/${news.id}`, { state: news })}
                     />
                 ))}
             </div>

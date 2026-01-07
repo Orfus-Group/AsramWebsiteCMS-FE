@@ -4,6 +4,7 @@ const CreateNewsPost = () => {
     // State for form fields
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [tags, setTags] = useState('');
     const [college, setCollege] = useState('');
     const [category, setCategory] = useState('');
     const [bannerImage, setBannerImage] = useState(null);
@@ -94,6 +95,7 @@ const CreateNewsPost = () => {
         console.log('Text Fields:', {
             title,
             content,
+            tags,
             college,
             category
         });
@@ -119,6 +121,7 @@ const CreateNewsPost = () => {
         if (window.confirm('Are you sure you want to clear the form? This action cannot be undone.')) {
             setTitle('');
             setContent('');
+            setTags('');
             setCollege('');
             setCategory('');
             setBannerImage(null);
@@ -143,7 +146,13 @@ const CreateNewsPost = () => {
         }
 
         console.group('Saving Draft Payload');
-        console.log('Text Fields:', { title, content, college, category });
+        console.log('Text Fields:', {
+            title,
+            content,
+            tags,
+            college,
+            category
+        });
         console.log('File:', bannerImage);
         // Log FormData entries
         const payloadObject = {};
@@ -271,6 +280,27 @@ const CreateNewsPost = () => {
                         color: errors.content ? '#dc2626' : 'rgba(25, 25, 25, 0.75)',
                         lineHeight: '1.5',
                         whiteSpace: 'pre-wrap'
+                    }}
+                />
+            </div>
+
+            {/* Tags Input */}
+            <div className="w-full shrink-0" style={{ marginBottom: '20px' }}>
+                <input
+                    type="text"
+                    placeholder="Add Tags"
+                    value={tags}
+                    onChange={(e) => setTags(e.target.value)}
+                    className="w-full focus:outline-none transition-all font-['Montserrat'] placeholder-[rgba(25,25,25,0.75)]"
+                    style={{
+                        height: '48px',
+                        padding: '0 20px',
+                        borderRadius: '9px',
+                        border: '1px solid rgba(7, 7, 7, 0.2)',
+                        backgroundColor: '#fff',
+                        fontSize: '18px',
+                        color: 'rgba(25, 25, 25, 0.75)',
+                        lineHeight: 'normal'
                     }}
                 />
             </div>

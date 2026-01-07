@@ -6,7 +6,10 @@ import DashboardLayout from '../components/dashboard/DashboardLayout';
 
 import NewsSection from '../components/dashboard/NewsSection';
 import CreateNewsPost from '../components/dashboard/CreateNewsPost';
+import EditNewsPost from '../components/dashboard/EditNewsPost';
 import EventDashboard from '../components/dashboard/EventDashboard';
+import UserManagement from '../components/dashboard/UserManagement';
+import Enquiries from '../components/dashboard/Enquiries';
 
 const AppRoutes = () => {
     return (
@@ -22,6 +25,17 @@ const AppRoutes = () => {
             <Route path="/dashboard/create" element={
                 <DashboardLayout>
                     <CreateNewsPost />
+                </DashboardLayout>
+            } />
+            <Route path="/dashboard/edit/:id" element={<EditNewsPost />} />
+            <Route path="/dashboard-user" element={
+                <DashboardLayout>
+                    <UserManagement />
+                </DashboardLayout>
+            } />
+            <Route path="/dashboard-enquiries" element={
+                <DashboardLayout>
+                    <Enquiries />
                 </DashboardLayout>
             } />
             <Route path="/event-dashboard" element={

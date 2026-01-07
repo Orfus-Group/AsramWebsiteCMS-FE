@@ -65,18 +65,18 @@ const Sidebar = ({ isOpen = false, onClose }) => {
 
     React.useEffect(() => {
         const path = location.pathname;
-        if (path.includes('/dashboard')) {
-            if (path === '/event-dashboard') {
-                setActiveItem('Events');
-            } else if (path.includes('create')) {
-                // Keep 'News' active for create news or maybe nothing? 
-                // Defaulting to News for now as it's part of news flow usually
+        if (path === '/dashboard-user') {
+            setActiveItem('User Management');
+        } else if (path === '/dashboard-enquiries') {
+            setActiveItem('Enquiries');
+        } else if (path === '/event-dashboard') {
+            setActiveItem('Events');
+        } else if (path.includes('/dashboard')) {
+            if (path.includes('create')) {
                 setActiveItem('News');
             } else {
                 setActiveItem('News');
             }
-        } else if (path === '/event-dashboard') {
-            setActiveItem('Events');
         }
     }, [location]);
 
@@ -86,6 +86,10 @@ const Sidebar = ({ isOpen = false, onClose }) => {
             navigate('/event-dashboard');
         } else if (label === 'News') {
             navigate('/dashboard');
+        } else if (label === 'User Management') {
+            navigate('/dashboard-user');
+        } else if (label === 'Enquiries') {
+            navigate('/dashboard-enquiries');
         }
         // if (window.innerWidth < 768 && onClose) onClose();
     };

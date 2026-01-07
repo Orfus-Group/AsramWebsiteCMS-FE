@@ -43,3 +43,224 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: #6B7280;
 }
+
+
+
+.text-asram-primary {
+    color: #223f7f;
+}
+
+.text-asram-gray {
+    color: #4a5565;
+}
+
+.article-header-layout {
+    margin-top: 40px;
+}
+
+.news-title {
+    font-family: "Montserrat", sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: normal;
+    /* "Auto" in Figma */
+    letter-spacing: 0px;
+    /* "0%" in Figma */
+    color: #223f7f;
+}
+
+.news-card-container {
+    padding: 30px;
+    border-radius: 9.4px;
+    border: 1px solid rgba(7, 7, 7, 0.2);
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.tag-base {
+    padding: 7.5px 15px;
+    border-radius: 9.4px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tag-primary {
+    background-color: #223f7f;
+    color: #ffffff;
+    font-size: 14px;
+    /* Approximated from context or keep default */
+}
+
+.tag-secondary {
+    background-color: #f3f4f6;
+    color: #364153;
+    font-size: 13.1px;
+}
+
+.share-btn {
+    width: 90.3px;
+    height: 34.8px;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 16px;
+    border-radius: 9.4px;
+    background-color: #223f7f;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+}
+
+.share-label {
+    width: 44px;
+    height: 17px;
+    margin: 0 0 1.8px;
+    /* As per Figma */
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: rgba(25, 25, 25, 0.75);
+}
+
+.meta-data-row {
+    margin-bottom: 40px;
+}
+
+.global-page-spacing {
+    width: 100%;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 120px;
+    padding-right: 120px;
+}
+
+/* Specific spacing maps only to margin-top now if needed, or use utility classes */
+.toolbar-spacing {
+    margin-top: 80px;
+}
+
+.news-section-spacing {
+    margin-top: 40px;
+}
+
+.article-header-layout {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.article-content-layout {
+    margin-top: 0px;
+    /* Al already has spacing from previous element's margin-bottom or global spacing */
+    margin-bottom: 80px;
+}
+
+.article-text {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #4a5565;
+    margin-bottom: 24px;
+}
+
+.article-subheading {
+    font-family: "Montserrat", sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #223f7f;
+    margin-top: 24px;
+    margin-bottom: 16px;
+}
+
+.article-blockquote {
+    background-color: #f1f5f9;
+    border-left: 4px solid #223f7f;
+    padding: 24px;
+    border-radius: 4px;
+    margin-top: 8px;
+    margin-bottom: 32px;
+}
+
+.quote-text {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-style: italic;
+    color: #334155;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.quote-author {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.article-tags-row {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tag-label {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tag-pill {
+    background-color: #f1f5f9;
+    color: #475569;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.user-modal-save-btn {
+    background-color: #223f7f;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 10px 24px;
+    border-radius: 8px;
+    white-space: nowrap;
+    min-width: fit-content;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.user-modal-save-btn:hover {
+    background-color: #1a3366;
+}
