@@ -142,6 +142,33 @@ body {
     color: rgba(25, 25, 25, 0.75);
 }
 
+.ck-editor-done-btn {
+    display: inline-flex;
+    padding: 6px 16px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    background-color: #223f7f;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: normal;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ck-editor-done-btn:hover {
+    background-color: #1a3163;
+    transform: translateY(-1px);
+}
+
+.ck-editor-done-btn:active {
+    transform: translateY(0);
+}
+
 .meta-data-row {
     margin-bottom: 40px;
 }
@@ -363,4 +390,166 @@ body {
 
 .enquiries-dropdown-item:hover {
     background-color: #f6f8fb;
+}
+
+/* Rich Text Content Styles (Restore HTML defaults) */
+.rich-text-content {
+    line-height: 1.6;
+    color: #4a5565;
+    /* .article-text color */
+    font-size: 16px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.rich-text-content h1 {
+    display: block;
+    font-size: 42px;
+    /* .news-title size */
+    font-weight: 700;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    color: #223f7f;
+    /* .text-asram-primary */
+    line-height: 1.2;
+}
+
+.rich-text-content h2 {
+    display: block;
+    font-size: 26px;
+    /* .article-subheading size */
+    font-weight: 700;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    color: #223f7f;
+    line-height: 1.3;
+}
+
+.rich-text-content h3 {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    color: #223f7f;
+    line-height: 1.4;
+}
+
+.rich-text-content h4 {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 1.33em;
+    margin-bottom: 1.33em;
+    color: #223f7f;
+}
+
+.rich-text-content ul {
+    display: block;
+    list-style-type: disc;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding-left: 20px;
+}
+
+.rich-text-content ol {
+    display: block;
+    list-style-type: decimal;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding-left: 20px;
+}
+
+.rich-text-content p {
+    margin-bottom: 24px;
+    /* .article-text margin */
+}
+
+.rich-text-content strong {
+    font-weight: 700;
+}
+
+.rich-text-content em {
+    font-style: italic;
+}
+
+/* Force styles within CKEditor editing root */
+.ck-content h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin: 0.67em 0;
+    color: #223f7f;
+    font-family: "Montserrat", sans-serif;
+}
+
+.ck-content h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin: 24px 0 16px;
+    color: #223f7f;
+    font-family: "Montserrat", sans-serif;
+}
+
+.ck-content h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 1em 0;
+    color: #223f7f;
+    font-family: "Montserrat", sans-serif;
+}
+
+.ck-content ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+.ck-content ol {
+    list-style: decimal;
+    padding-left: 20px;
+}
+
+.ck-content p {
+    margin-bottom: 24px;
+    color: #4a5565;
+    font-family: "Montserrat", sans-serif;
+}
+
+/* Transparent wrapper for titles/headings to inherit parent styles */
+.rich-text-transparent {
+    display: inline;
+}
+
+.rich-text-transparent p {
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    color: inherit;
+    display: inline;
+}
+
+/* Ensure editor input for Title matches the design */
+.news-title .ck-content p,
+.news-title .ck-content h1 {
+    font-size: 42px !important;
+    font-weight: 700 !important;
+    color: #223f7f !important;
+    margin: 0 !important;
+    line-height: normal !important;
+}
+
+/* Ensure editor input for Subheadings matches the design */
+.article-subheading .ck-content p,
+.article-subheading .ck-content h2,
+.article-subheading .ck-content h3 {
+    font-size: 26px !important;
+    font-weight: 700 !important;
+    color: #223f7f !important;
+    margin: 0 !important;
+    line-height: normal !important;
+}
+
+/* Hide CKEditor branding */
+.ck-powered-by {
+    display: none !important;
 }
