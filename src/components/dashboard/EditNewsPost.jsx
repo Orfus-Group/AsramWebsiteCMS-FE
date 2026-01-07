@@ -110,7 +110,7 @@ const EditNewsPost = () => {
 
 
             {/* ==================== ACTIONS TOOLBAR ==================== */}
-            <div className="sticky top-0 z-30 toolbar-spacing global-page-spacing">
+            <div className=" z-30 toolbar-spacing global-page-spacing">
                 <div className="w-full py-4">
                     <div className="flex items-center justify-between gap-5 w-full">
                         <button className="flex-1 h-[48px] rounded-md bg-[#E2E8F0] text-[#475569] font-medium hover:bg-[#CBD5E1]">
