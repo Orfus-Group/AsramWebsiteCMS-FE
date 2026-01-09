@@ -550,6 +550,39 @@ body {
 }
 
 /* Hide CKEditor branding */
+/* Input Tag Chips */
+.input-tag-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background-color: #f1f5f9;
+    color: #223f7f;
+    border-radius: 9999px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.input-tag-close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin-left: 2px;
+    transition: color 0.2s;
+}
+
+
+/* Hide CKEditor branding */
 .ck-powered-by {
     display: none !important;
 }

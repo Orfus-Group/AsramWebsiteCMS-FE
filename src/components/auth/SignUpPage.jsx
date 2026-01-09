@@ -210,7 +210,7 @@ const SignUpPage = () => {
                         Sign Up
                     </Button>
 
-                    <div className="flex items-center w-full" style={{ marginTop: '10.1px', marginBottom: '12.4px', gap: '16px' }}>
+                    {/* <div className="flex items-center w-full" style={{ marginTop: '10.1px', marginBottom: '12.4px', gap: '16px' }}>
                         <div className="h-[1.2px] flex-1 bg-[rgba(7,7,7,0.2)]"></div>
                         <span className="text-[14px] leading-[20px] font-normal text-[rgba(25,25,25,0.75)] shrink-0">
                             Or
@@ -226,7 +226,7 @@ const SignUpPage = () => {
                         onClick={handleSSOSignIn}
                     >
                         Sign in with SSO
-                    </Button>
+                    </Button> */}
                 </div>
             </form>
 

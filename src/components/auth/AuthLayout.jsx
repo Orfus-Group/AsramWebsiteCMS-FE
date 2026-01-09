@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '../common/Logo';
 
-const AuthLayout = ({ children }) => {
+const AuthLayout = ({ children, bottomContent }) => {
     return (
         <div
             className="min-h-screen w-screen bg-cover bg-center bg-no-repeat flex items-center justify-center py-[60px]"
@@ -10,12 +10,8 @@ const AuthLayout = ({ children }) => {
             }}
         >
             <div
-                className="flex items-center w-full max-w-[1440px]"
-                style={{
-                    paddingLeft: '120px',
-                    paddingRight: '210px',
-                    gap: '172.9px'
-                }}
+                className="flex items-center justify-evenly w-full max-w-[1440px] px-4 md:px-8 lg:px-16 xl:px-[120px] gap-8 lg:gap-16 xl:gap-[100px]"
+            // Removed fixed inline padding/gap to allow responsive behavior
             >
                 {/* Left Section - Branding */}
                 <div className="flex flex-col">
@@ -71,6 +67,12 @@ const AuthLayout = ({ children }) => {
                     >
                         {children}
                     </div>
+                    {/* Bottom Content (optional) - e.g. Secure System Disclaimer */}
+                    {bottomContent && (
+                        <div style={{ marginTop: '24px', width: '469px' }}>
+                            {bottomContent}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

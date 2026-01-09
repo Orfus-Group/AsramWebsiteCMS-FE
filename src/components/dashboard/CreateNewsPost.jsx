@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const CreateNewsPost = () => {
     // State for form fields
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const [tags, setTags] = useState('');
+    const [tagsList, setTagsList] = useState([]);
+    const [tagInput, setTagInput] = useState('');
     const [college, setCollege] = useState('');
     const [category, setCategory] = useState('');
     const [bannerImage, setBannerImage] = useState(null);
@@ -63,6 +66,23 @@ const CreateNewsPost = () => {
         fileInputRef.current.click();
     };
 
+    const handleTagKeyDown = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const val = tagInput.trim();
+            if (val && !tagsList.includes(val)) {
+                setTagsList([...tagsList, val]);
+                setTagInput('');
+            }
+        } else if (e.key === 'Backspace' && !tagInput && tagsList.length > 0) {
+            setTagsList(tagsList.slice(0, -1));
+        }
+    };
+
+    const removeTag = (indexToRemove) => {
+        setTagsList(tagsList.filter((_, index) => index !== indexToRemove));
+    };
+
     const handleSubmit = async () => {
         const newErrors = {};
 
@@ -95,7 +115,9 @@ const CreateNewsPost = () => {
         console.log('Text Fields:', {
             title,
             content,
-            tags,
+            title,
+            content,
+            tags: tagsList,
             college,
             category
         });
@@ -121,7 +143,10 @@ const CreateNewsPost = () => {
         if (window.confirm('Are you sure you want to clear the form? This action cannot be undone.')) {
             setTitle('');
             setContent('');
-            setTags('');
+            setTitle('');
+            setContent('');
+            setTagsList([]);
+            setTagInput('');
             setCollege('');
             setCategory('');
             setBannerImage(null);
@@ -149,7 +174,9 @@ const CreateNewsPost = () => {
         console.log('Text Fields:', {
             title,
             content,
-            tags,
+            title,
+            content,
+            tags: tagsList,
             college,
             category
         });
@@ -171,13 +198,59 @@ const CreateNewsPost = () => {
 
     return (
         <div
-            className="flex flex-col w-full h-full overflow-hidden font-['Montserrat'] bg-white"
+            className="flex flex-col w-full h-full overflow-y-auto font-['Montserrat'] bg-white"
             // MATCHING DASHBOARD LAYOUT PADDING EXACTLY (Top Fixed to 24px)
             style={{
                 padding: '24px clamp(16px, 4vw, 48px) clamp(16px, 5vw, 48px) clamp(16px, 4vw, 48px)',
                 maxWidth: '1240px'
             }}
         >
+            <style>{`
+                /* CKEditor Custom Overrides */
+                .ck.ck-toolbar {
+                    border-color: rgba(7, 7, 7, 0.2) !important;
+                    border-top-left-radius: 9px !important;
+                    border-top-right-radius: 9px !important;
+                    background: #f8f9fa !important;
+                }
+                .ck.ck-editor__main > .ck-editor__editable {
+                    border-color: rgba(7, 7, 7, 0.2) !important;
+                    border-bottom-left-radius: 9px !important;
+                    border-bottom-right-radius: 9px !important;
+                    box-shadow: none !important;
+                }
+                .ck.ck-editor__main > .ck-editor__editable:focus {
+                    border-color: #223f7f !important; /* Focus color */
+                }
+                
+                /* Error State */
+                .ck-error .ck.ck-toolbar,
+                .ck-error .ck.ck-editor__main > .ck-editor__editable {
+                    border-color: #dc2626 !important;
+                }
+
+                /* Title Specifics */
+                .news-title-editor .ck-editor__editable {
+                    min-height: 139px;
+                    padding: 20px !important;
+                    font-size: 18px;
+                }
+
+                /* Content Specifics */
+                .news-content-editor .ck-editor {
+                    display: flex;
+                    flex-direction: column;
+                }
+                .news-content-editor .ck-editor__main {
+                    display: flex;
+                    flex-direction: column;
+                }
+                .news-content-editor .ck-editor__editable {
+                    min-height: 300px;
+                    padding: 20px !important;
+                    font-size: 18px;
+                }
+            `}</style>
             <input
                 type="file"
                 ref={fileInputRef}
@@ -238,63 +311,74 @@ const CreateNewsPost = () => {
 
             {/* Title Input */}
             <div className="w-full shrink-0" style={{ marginBottom: '12px' }}>
-                <textarea
-                    placeholder={errors.title ? errors.title : "Enter Title"}
-                    value={title}
-                    onChange={(e) => {
-                        setTitle(e.target.value);
-                        if (errors.title) setErrors({ ...errors, title: '' });
-                    }}
-                    className={`w-full focus:outline-none transition-all resize-none font-['Montserrat'] ${errors.title ? 'placeholder-red-500' : 'placeholder-[rgba(25,25,25,0.75)]'
-                        }`}
+                <div
+                    className={`news-title-editor ${errors.title ? 'ck-error' : ''}`}
                     style={{
-                        height: '139px',
-                        padding: '20px',
-                        borderRadius: '9px',
-                        border: errors.title ? '1px solid #dc2626' : '1px solid rgba(7, 7, 7, 0.2)',
-                        backgroundColor: '#fff',
-                        fontSize: '18px',
-                        color: errors.title ? '#dc2626' : 'rgba(25, 25, 25, 0.75)',
-                        lineHeight: '1.11'
+                        zIndex: 10,
+                        position: 'relative'
                     }}
-                />
+                >
+                    <CKEditor
+                        editor={ClassicEditor}
+                        data={title}
+                        onReady={(editor) => {
+                            // You can store the "editor" and use when it is needed.
+                        }}
+                        onChange={(event, editor) => {
+                            const data = editor.getData();
+                            setTitle(data);
+                            if (errors.title) setErrors({ ...errors, title: '' });
+                        }}
+                        config={{
+                            placeholder: "Enter Title",
+                            toolbar: [
+                                'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', '|', 'undo', 'redo'
+                            ]
+                        }}
+                    />
+                </div>
             </div>
 
             {/* Content Text Area */}
-            <div className="w-full flex-1 min-h-0" style={{ marginBottom: '20px' }}>
-                <textarea
-                    placeholder={errors.content ? errors.content : "Enter Content"}
-                    value={content}
-                    onChange={(e) => {
-                        setContent(e.target.value);
-                        if (errors.content) setErrors({ ...errors, content: '' });
-                    }}
-                    className={`w-full h-full focus:outline-none transition-all resize-none font-['Montserrat'] ${errors.content ? 'placeholder-red-500' : 'placeholder-[rgba(25,25,25,0.75)]'
-                        }`}
+            <div className="w-full shrink-0" style={{ marginBottom: '20px' }}>
+                <div
+                    className={`news-content-editor ${errors.content ? 'ck-error' : ''}`}
                     style={{
-                        padding: '12px 20px',
-                        borderRadius: '9px',
-                        border: errors.content ? '1px solid #dc2626' : '1px solid rgba(7, 7, 7, 0.2)',
-                        backgroundColor: '#fff',
-                        fontSize: '18px',
-                        color: errors.content ? '#dc2626' : 'rgba(25, 25, 25, 0.75)',
-                        lineHeight: '1.5',
-                        whiteSpace: 'pre-wrap'
+                        display: 'flex',
+                        flexDirection: 'column',
+                        zIndex: 1,
+                        position: 'relative'
                     }}
-                />
+                >
+                    <CKEditor
+                        editor={ClassicEditor}
+                        data={content}
+                        onReady={(editor) => {
+                            // You can store the "editor" and use when it is needed.
+                        }}
+                        onChange={(event, editor) => {
+                            const data = editor.getData();
+                            setContent(data);
+                            if (errors.content) setErrors({ ...errors, content: '' });
+                        }}
+                        config={{
+                            placeholder: "Enter Content",
+                            toolbar: [
+                                'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', '|', 'mediaEmbed', 'insertTable', '|', 'undo', 'redo'
+                            ]
+                        }}
+                    />
+                </div>
             </div>
 
-            {/* Tags Input */}
+            {/* Tags Input (Chips) */}
             <div className="w-full shrink-0" style={{ marginBottom: '20px' }}>
-                <input
-                    type="text"
-                    placeholder="Add Tags"
-                    value={tags}
-                    onChange={(e) => setTags(e.target.value)}
-                    className="w-full focus:outline-none transition-all font-['Montserrat'] placeholder-[rgba(25,25,25,0.75)]"
+                <div
+                    className="w-full flex flex-wrap items-center gap-2 p-[6px] transition-all font-['Montserrat']"
                     style={{
-                        height: '48px',
-                        padding: '0 20px',
+                        minHeight: '48px',
+                        paddingLeft: '20px',
+                        paddingRight: '20px',
                         borderRadius: '9px',
                         border: '1px solid rgba(7, 7, 7, 0.2)',
                         backgroundColor: '#fff',
@@ -302,7 +386,39 @@ const CreateNewsPost = () => {
                         color: 'rgba(25, 25, 25, 0.75)',
                         lineHeight: 'normal'
                     }}
-                />
+                    onClick={() => document.getElementById('tag-input-field')?.focus()}
+                >
+                    {tagsList.map((tag, index) => (
+                        <span
+                            key={index}
+                            className="input-tag-chip"
+                        >
+                            {tag}
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    removeTag(index);
+                                }}
+                                className="input-tag-close-btn"
+                            >
+                                ×
+                            </button>
+                        </span>
+                    ))}
+                    <input
+                        id="tag-input-field"
+                        type="text"
+                        placeholder={tagsList.length === 0 ? "Add Tags" : ""}
+                        value={tagInput}
+                        onChange={(e) => setTagInput(e.target.value)}
+                        onKeyDown={handleTagKeyDown}
+                        className="flex-1 min-w-[120px] focus:outline-none bg-transparent h-full"
+                        style={{
+                            fontSize: '18px',
+                            color: 'rgba(25, 25, 25, 0.75)'
+                        }}
+                    />
+                </div>
             </div>
 
             {/* Bottom Grid: Image Upload (Left) + Controls (Right) */}
